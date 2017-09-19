@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <% include ../partials/header.ejs %>
+</head>
+
+<body>
+  <% include ../partials/navbar.ejs %>
+  <br>
+  <!-- Begin Container -->
+  <div class="container-fluid add">
+    <div class="text-center">
+      <br>
+      <h1><i class="fa fa-file-image-o" aria-hidden="true"></i></h1>
+      <h2 style="color: #FFFFCC">   Click on &hearts; to add the image to your collection.</h2>
+      <br>
+      <div class="col-sm-offset-1 col-sm-10">
+        <a href="/newSearch" class="btn btn-success btn-lg active" role="button" aria-pressed="true">New Search</a>
+      </div>
+      <br>
+      <br>
+    </div>
+    <br>
+    <div class="container-fluid">
+      <div id="info">Loading...</div>
+      <div class="grid" style="position: relative; height: 184px;" id="grid1">
+        <div class="grid-sizer"></div>
+      </div>
+    </div>
+  </div>
+  <!-- /.container -->
+<footer>
+  <script>
+  var user = <%- JSON.stringify(user) %>;
+  var pins = <%- JSON.stringify(pins) %>;
+  console.log('add pins 2 page!');
+  //console.log(pins);
+  //new code
+  $.ajax({
+    type: 'GET',
+    url: '/getAllPins',
+    /*data: {email: user},*/
+    success: function(data) {
+      if(pins.length == 0){
+        $('#info').html("You have no pins.");
+        console.log(pins);
+      }else {
+        $('#info').html("");
+        console.log(data.pins[0].url);
+        for(var i = 0; i < pins.length; i++){
+          var htmlCards = '<div class="grid-item"><div class="card">';
+          htmlCards += '<div class="img-wrapper"><div class="pin-title1"><a href="/movePin?id='+pins[i]._id+'">&hearts;</a></div><img src="'+pins[i].thumbnail+'" class="img-responsive img-rounded" onerror="imgError(this);"><div class="text-bottom">Name: ' +pins[i].name+'</div></div>';
+          $('#grid1').append(htmlCards);
+        }
+        setTimeout(function(){
+          $('.grid').masonry({
+            // set itemSelector so .grid-sizer is not used in layout
+            itemSelector: '.grid-item',
+            // use element for option
+            columnWidth: '.grid-sizer',
+            percentPosition: true
+          });
+        }, 200);
+      }
+    }
+  });
+  function imgError(image) {
+    image.onerror = "";
+    image.src = "http://www.avsforum.com/photopost/data/2277869/9/9f/9f50538d_test.jpeg";
+    return true;
+  }
+  </script>
+  <% include ../partials/footer.ejs %>
+</footer>
+</body>
+
+</html>

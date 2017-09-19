@@ -1,0 +1,22 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">Pinterest Clone Home</a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Menu
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <% if ((user.google = !null) || (user.twitter = !null)) { %>
+            <li id="addLink"><a href="/allPins" style="color:white;">All Pins</a></li>
+            <li id="mypinsLink"><a href="/myPins"  style="color:white;">My Pins</a></li>
+            <li id="addLink"><a href="/add" style="color:white;">Add Pins</a></li>
+            <li id="profile"><a href="/profile" style="color:white;">Profile</a></li>
+            <li id="infoLink"><a href="/user" style="color:white;">Settings</a></li>
+            <li id="logoutLink"><a href="/logout" style="color:white;">Logout</a></li>
+              <% } else { %>
+                <li id="loginLink"><a href="/">Sign In/Create Account</a></li>
+          <% } %>
+    </div>
+</nav>

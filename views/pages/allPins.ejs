@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <% include ../partials/header.ejs %>
+</head>
+
+<body>
+  <% include ../partials/navbar.ejs %>
+  <!-- Begin Container -->
+  <br>
+  <div class="container-fluid text-center">
+  <h1><span class="fa fa-file-image-o"> </span> Other's Pins</h1>
+  <br>
+  <hr>
+  <br>
+  <br>
+<div class="container-fluid text-center">
+  <div id="info"></div>
+  <div class="grid" style="position: relative; height: 184px;">
+    <div class="grid-sizer"></div>
+  </div>
+</div>
+
+</div>
+  <!-- /.container -->
+  <footer>
+    <script>
+    var allPins = <%- JSON.stringify(allpins) %>;
+    var user = <%- JSON.stringify(user) %>;
+    console.log(allPins);
+    console.log(user);
+
+    for(var i = 0; i < allPins.length; i++){
+      if (user.twitter.displayName!==allPins[i].userTwitter.displayName){
+        var htmlCards = '<div class="grid-item"><div class="card">';
+        htmlCards += '<div class="img-wrapper"><img src="'+allPins[i].thumbnail+'" class="img-responsive img-rounded" onerror="imgError(this);"><div class="text-bottom">' +allPins[i].name+'<br><br>' +allPins[i].userTwitter.displayName+'</div></div>';
+        //htmlCards += '<div class="caption text-center"><div class="pin-title"><a href="/deletePin?id='+allPins[i]._id+'">&hearts;</a></div></div></div></div>';
+        $('.grid').append(htmlCards);
+      }
+    }
+    if(allPins.length == 0){
+      $('#info').append("You have no pins.")
+    }
+    setTimeout(function(){
+      $('.grid').masonry({
+        // set itemSelector so .grid-sizer is not used in layout
+        itemSelector: '.grid-item',
+        // use element for option
+        columnWidth: '.grid-sizer',
+        percentPosition: true
+      });
+    }, 200);
+    function imgError(image) {
+      image.onerror = "";
+      image.src = "http://www.avsforum.com/photopost/data/2277869/9/9f/9f50538d_test.jpeg";
+      return true;
+    }
+    </script>
+    <% include ../partials/footer.ejs %>
+  </footer>
+</body>
+</html>

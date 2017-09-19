@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <% include ../partials/header.ejs %>
+</head>
+
+<body>
+  <% include ../partials/navbar.ejs %>
+  <br>
+  <!-- Begin Container -->
+  <div class="container-fluid add">
+    <div class="text-center">
+      <br>
+      <h1><span class="fa fa-fa-file-image-o"></span> Add Images</h1>
+      <hr>
+      <h1><i class="fa fa-file-image-o" aria-hidden="true"></i></h1>
+      <h3>  Search for images using the powerful Bing search engine. Then click on the &hearts; to add the image to your collection.</h3>
+      <br>
+    </div>
+    <form class="form-horizontal" role="form" action="/pinData">
+    <div class="form-group center">
+        <div class="container-fluid">
+            <input type="text" class="form-control" id="url" name="url" placeholder="Search for image..." style="width: 150px; display: inline;" ><button type="submit" class="btn btn-success" style="width: 40px; margin: 5px;"><i class="fa fa-search" aria-hidden="true"></i></button>
+        </div>
+    </div>
+    </div>
+    </form>
+
+
+  </div>
+  <!-- /.container -->
+<footer>
+  <% include ../partials/footer.ejs %>
+</footer>
+</body>
+
+</html>
